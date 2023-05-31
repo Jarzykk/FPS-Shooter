@@ -5,11 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed = 3f;
-    [SerializeField] private float _sprintSpeed = 5f;
-    [SerializeField] private float _jumpHeight = 1f;
-    [SerializeField] private float _gravity = -9.8f;
+    [SerializeField] private PlayerStats _playerStats;
 
+    private float _moveSpeed = 3f;
+    private float _sprintSpeed = 5f;
+    private float _jumpHeight = 1f;
+
+    private float _gravity = -9.8f;
     private CharacterController _controller;
     private Vector3 _playerVelocity;
     private bool _isGrounded;
@@ -21,12 +23,14 @@ public class PlayerMovement : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _currentSpeed = _moveSpeed;
+        _moveSpeed = _playerStats.MoveSpeed;
+        _sprintSpeed = _playerStats.SprintSpeed;
+        _jumpHeight = _playerStats.JumpHeight;
     }
 
     private void Update()
     {
         _isGrounded = _controller.isGrounded;
-        Debug.Log(_playerVelocity.y);
     }
 
 
