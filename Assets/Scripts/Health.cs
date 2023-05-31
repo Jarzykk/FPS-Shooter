@@ -10,6 +10,8 @@ public class Health : MonoBehaviour, IDamageable
     private int _currentHealth;
     private bool _isDead = false;
 
+    public int CurrentHealth => _currentHealth;
+
     public event UnityAction Died;
 
     private void Start()
