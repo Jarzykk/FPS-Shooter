@@ -9,4 +9,9 @@ public class Player : MonoBehaviour
     private bool _isAlive => _health.CurrentHealth > 0;
 
     public bool IsAlive => _isAlive;
+
+    public void TakeDamage(int damage)
+    {
+        _health.TakeDamage(damage);
+    }
 }
