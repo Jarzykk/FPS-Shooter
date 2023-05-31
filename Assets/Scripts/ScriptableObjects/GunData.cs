@@ -14,4 +14,5 @@ public class GunData : ScriptableObject
     public int Damage => _damage;
     public float MaxDistance => _maxDistance;
     public float FireRate => _fireRate;
+    public Bullet BulletType => _bulletType;
 }

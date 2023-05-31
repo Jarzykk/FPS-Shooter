@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 17
   _maxDistance: 150
-  _fireRate: 200
+  _fireRate: 350
   _bulletType: {fileID: 11400000, guid: 31f5cec206b85e543a4aa39114717be6, type: 2}
