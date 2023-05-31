@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent), typeof(Enemy))]
 public class PersueState : State
 {
     private NavMeshAgent _navMeshAgent;
     private Player _player;
+
+    public event UnityAction StartedMovement;
+    public event UnityAction StoppedMovement;
 
     private void Awake()
     {
@@ -18,11 +22,13 @@ public class PersueState : State
     private void OnEnable()
     {
         _navMeshAgent.isStopped = false;
+        StartedMovement?.Invoke();
     }
 
     private void OnDisable()
     {
         _navMeshAgent.isStopped = true;
+        StoppedMovement?.Invoke();
     }
 
     private void Update()

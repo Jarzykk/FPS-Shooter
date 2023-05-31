@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Enemy))]
 public class AttackState : State
@@ -14,6 +15,8 @@ public class AttackState : State
     private bool _aimAtPlayer;
 
     private Enemy _enemy;
+
+    public event UnityAction Shoot;
 
     private void Awake()
     {
@@ -71,6 +74,7 @@ public class AttackState : State
             if(shootAccuracy <= _accuracy)
             {
                 _enemy.Player.TakeDamage(_enemy.Damage);
+                Shoot?.Invoke();
             }
             else
             {
