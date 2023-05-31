@@ -21,11 +21,13 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         _onFootInputActions.Enable();
+        _playerInput.OnFoot.Jump.performed += ctx => _playerMovement.Jump();
     }
 
     private void OnDisable()
     {
         _onFootInputActions.Disable();
+        _playerInput.OnFoot.Jump.performed -= ctx => _playerMovement.Jump();
     }
 
     private void FixedUpdate()
