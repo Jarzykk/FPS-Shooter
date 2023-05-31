@@ -5,18 +5,22 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _moveSpeed = 3f;
+    [SerializeField] private float _sprintSpeed = 5f;
     [SerializeField] private float _jumpHeight = 1f;
     [SerializeField] private float _gravity = -9.8f;
 
     private CharacterController _controller;
     private Vector3 _playerVelocity;
     private bool _isGrounded;
+    private bool _isSprinting = false;
     private float _yVelocity = 2f;
+    private float _currentSpeed;
 
     private void Start()
     {
         _controller = GetComponent<CharacterController>();
+        _currentSpeed = _moveSpeed;
     }
 
     private void Update()
@@ -31,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
-        _controller.Move(transform.TransformDirection(moveDirection) * _speed * Time.deltaTime);
+        _controller.Move(transform.TransformDirection(moveDirection) * _currentSpeed * Time.deltaTime);
 
         _playerVelocity.y += _gravity * Time.deltaTime;
 
@@ -47,5 +51,15 @@ public class PlayerMovement : MonoBehaviour
         {
             _playerVelocity.y = Mathf.Sqrt(_jumpHeight * -_yVelocity * _gravity);
         }
+    }
+
+    public void ChangeSprintStance()
+    {
+        _isSprinting = !_isSprinting;
+
+        if (_isSprinting == false)
+            _currentSpeed = _moveSpeed;
+        else if (_isSprinting)
+            _currentSpeed = _sprintSpeed;
     }
 }

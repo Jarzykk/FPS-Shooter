@@ -25,12 +25,16 @@ public class InputManager : MonoBehaviour
     {
         _onFootInputActions.Enable();
         _playerInput.OnFoot.Jump.performed += ctx => _playerMovement.Jump();
+        _playerInput.OnFoot.Sprint.performed += ctx => _playerMovement.ChangeSprintStance();
+        _playerInput.OnFoot.Sprint.canceled += ctx => _playerMovement.ChangeSprintStance();
     }
 
     private void OnDisable()
     {
         _onFootInputActions.Disable();
         _playerInput.OnFoot.Jump.performed -= ctx => _playerMovement.Jump();
+        _playerInput.OnFoot.Sprint.performed -= ctx => _playerMovement.ChangeSprintStance();
+        _playerInput.OnFoot.Sprint.canceled -= ctx => _playerMovement.ChangeSprintStance();
     }
 
     private void FixedUpdate()
