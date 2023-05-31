@@ -44,15 +44,15 @@ public class AttackState : State
 
     private bool CkeckIfAimingToPlayer()
     {
-        Vector3 targetDirection = _enemy.Player.transform.position - transform.position;
+        Vector3 targetDirection = _enemy.Player.transform.position - _enemy.EysPosition.position;
         float angleToPlayer = Vector3.Angle(transform.forward, targetDirection);
 
         if (angleToPlayer >= -_enemy.FieldOfView && angleToPlayer <= _enemy.FieldOfView)
         {
             Debug.Log("InAngle");
-            Ray ray = new Ray(_enemy.EysPosition.position, transform.forward * _enemy.SightDistance);
+            Ray ray = new Ray(_enemy.EysPosition.position, targetDirection * _enemy.SightDistance);
             RaycastHit hitInfo = new RaycastHit();
-            Debug.DrawRay(_enemy.EysPosition.position, transform.forward * _enemy.SightDistance);
+            Debug.DrawRay(_enemy.EysPosition.position, targetDirection * _enemy.SightDistance);
 
             if (Physics.Raycast(ray, out hitInfo, _enemy.SightDistance))
             {
@@ -74,12 +74,13 @@ public class AttackState : State
             if(shootAccuracy <= _accuracy)
             {
                 _enemy.Player.TakeDamage(_enemy.Damage);
-                Shoot?.Invoke();
             }
             else
             {
                 Debug.Log("Missed");
             }
+
+            Shoot?.Invoke();
             StartCoroutine(CountAttackCooldown(_attackRate));
         }
     }
