@@ -22,11 +22,13 @@ public class Health : MonoBehaviour, IDamageable
         if(_isDead == false)
         {
             _currentHealth -= damage;
+            Debug.Log("Took damage");
 
             if (_currentHealth <= 0)
             {
                 _isDead = true;
                 Died?.Invoke();
+                Destroy(gameObject);
             }
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement), typeof(PlayerLook), typeof(PlayerShooting))]
@@ -12,6 +13,8 @@ public class InputManager : MonoBehaviour
     private PlayerMovement _playerMovement;
     private PlayerLook _playerLook;
     private PlayerShooting _playerShooting;
+
+    public event UnityAction ShootButtonPressed;
 
     private void Awake()
     {
@@ -29,7 +32,8 @@ public class InputManager : MonoBehaviour
         _playerInput.OnFoot.Jump.performed += ctx => _playerMovement.Jump();
         _playerInput.OnFoot.Sprint.performed += ctx => _playerMovement.ChangeSprintStance();
         _playerInput.OnFoot.Sprint.canceled += ctx => _playerMovement.ChangeSprintStance();
-        _playerInput.OnFoot.Shoot.performed += ctx => _playerShooting.Shoot();
+        //_playerInput.OnFoot.Shoot.performed += ctx => _playerShooting.Shoot();
+        _playerInput.OnFoot.Shoot.performed += ctx => OnShootButtonPressed();
     }
 
     private void OnDisable()
@@ -38,7 +42,8 @@ public class InputManager : MonoBehaviour
         _playerInput.OnFoot.Jump.performed -= ctx => _playerMovement.Jump();
         _playerInput.OnFoot.Sprint.performed -= ctx => _playerMovement.ChangeSprintStance();
         _playerInput.OnFoot.Sprint.canceled -= ctx => _playerMovement.ChangeSprintStance();
-        _playerInput.OnFoot.Shoot.performed -= ctx => _playerShooting.Shoot();
+        //_playerInput.OnFoot.Shoot.performed -= ctx => _playerShooting.Shoot();
+        _playerInput.OnFoot.Shoot.performed -= ctx => OnShootButtonPressed();
     }
 
     private void FixedUpdate()
@@ -49,5 +54,10 @@ public class InputManager : MonoBehaviour
     private void LateUpdate()
     {
         _playerLook.ProcessLook(_onFootInputActions.Look.ReadValue<Vector2>());
+    }
+
+    private void OnShootButtonPressed()
+    {
+        ShootButtonPressed?.Invoke();
     }
 }
