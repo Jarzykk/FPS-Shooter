@@ -5,12 +5,26 @@ using UnityEngine;
 public class PlayersInventory : MonoBehaviour
 {
     [SerializeField] private Gun[] _guns;
+    [SerializeField] private WeaponSwitching _weaponSwitching;
 
     private Bullet[] _bullets;
     private BulletMagazine[] _bulletMagazines;
 
     public Gun[] Guns => _guns;
     public Bullet[] Bullets => _bullets;
+
+    private Gun _currentGun;
+
+    private void OnEnable()
+    {
+        _weaponSwitching.WeapoSwitched += OnWeaponSwitched;
+    }
+
+    private void OnDisable()
+    {
+        _weaponSwitching.WeapoSwitched -= OnWeaponSwitched;
+        _currentGun.ShootPerformed -= OnGunShoot;
+    }
 
     private void Start()
     {
@@ -58,13 +72,29 @@ public class PlayersInventory : MonoBehaviour
         return bulletAmount;
     }
 
+    private void OnWeaponSwitched(Gun gun)
+    {
+        if(_currentGun != null)
+            _currentGun.ShootPerformed -= OnGunShoot;
+
+        _currentGun = gun;
+        _currentGun.ShootPerformed += OnGunShoot;
+    }
+
+    private void OnGunShoot()
+    {
+        RemoveBullet(_currentGun.BulletType);
+    }
+
     public void RemoveBullet(Bullet bullet)
     {
+        int amountToRemove = 1;
+
         foreach (var magazine in _bulletMagazines)
         {
             if (magazine.BulletType == bullet)
             {
-                magazine.RemoveBulletAmount(1);
+                magazine.RemoveBulletAmount(amountToRemove);
                 break;
             }
         }

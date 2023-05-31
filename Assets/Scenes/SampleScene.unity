@@ -1772,6 +1772,7 @@ MonoBehaviour:
   - {fileID: 168580948}
   - {fileID: 632690024}
   - {fileID: 3271977788021962110}
+  _weaponSwitching: {fileID: 567120036}
 --- !u!1 &1874670495
 GameObject:
   m_ObjectHideFlags: 0

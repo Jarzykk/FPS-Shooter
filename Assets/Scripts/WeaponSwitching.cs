@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponSwitching : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class WeaponSwitching : MonoBehaviour
     private float _timeSinceLastSwitch;
 
     private int _currentWeaponIndex;
+    public event UnityAction<Gun> WeapoSwitched;
 
     private void OnEnable()
     {
@@ -38,6 +40,7 @@ public class WeaponSwitching : MonoBehaviour
 
         _selectedWeapon = _guns[_currentWeaponIndex];
         _selectedWeapon.gameObject.SetActive(true);
+        WeapoSwitched?.Invoke(_selectedWeapon);
 
         DisableNotSelectedWeapons();
     }
@@ -61,7 +64,6 @@ public class WeaponSwitching : MonoBehaviour
             _currentWeaponIndex++;
 
         ChangeWeapon(_currentWeaponIndex);
-        Debug.Log("Next");
     }
 
     private void EquipPreviousWeapon()
@@ -72,6 +74,5 @@ public class WeaponSwitching : MonoBehaviour
             _currentWeaponIndex--;
 
         ChangeWeapon(_currentWeaponIndex);
-        Debug.Log("Previous");
     }
 }
