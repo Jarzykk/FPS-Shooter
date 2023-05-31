@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f2819619cb091847966409c70c96a28, type: 3}
-  m_Name: Pistol
+  m_Name: AssaultRifle
   m_EditorClassIdentifier: 
-  _damage: 12
-  _maxDistance: 100
-  _fireRate: 200
-  _bulletType: {fileID: 11400000, guid: e715db78566643744a3de5e7e4e37805, type: 2}
+  _damage: 30
+  _maxDistance: 200
+  _fireRate: 100
+  _bulletType: {fileID: 11400000, guid: 666dfdcf080bced4b854da8b2d087e3e, type: 2}

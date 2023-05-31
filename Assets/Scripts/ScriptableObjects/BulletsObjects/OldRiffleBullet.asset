@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2819619cb091847966409c70c96a28, type: 3}
-  m_Name: AR
+  m_Script: {fileID: 11500000, guid: 685894c4249b29d4e96dcc0f3e2cf402, type: 3}
+  m_Name: OldRiffleBullet
   m_EditorClassIdentifier: 
-  name: Assault Riffle
-  _damage: 20
-  _maxDistance: 200
-  _fireRate: 100
+  _name: OldRiffleBullet

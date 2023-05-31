@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private Camera _shootCamera;
 
     private float _timeSinceLastShot = 0;
+    private int _bulletsAmount;
     private bool _canShoot => _timeSinceLastShot > 1f / (gunData.FireRate / 60f);
 
     private void OnEnable()

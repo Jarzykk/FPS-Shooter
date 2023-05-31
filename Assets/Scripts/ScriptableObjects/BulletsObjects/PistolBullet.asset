@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2819619cb091847966409c70c96a28, type: 3}
-  m_Name: Pistol
+  m_Script: {fileID: 11500000, guid: 685894c4249b29d4e96dcc0f3e2cf402, type: 3}
+  m_Name: PistolBullet
   m_EditorClassIdentifier: 
-  _damage: 12
-  _maxDistance: 100
-  _fireRate: 200
-  _bulletType: {fileID: 11400000, guid: e715db78566643744a3de5e7e4e37805, type: 2}
+  _name: PistolBullet
