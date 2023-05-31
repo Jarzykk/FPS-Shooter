@@ -7,16 +7,16 @@ public class GunData : ScriptableObject
 {
 
     [Header("Info")]
-    public new string name;
+    [SerializeField] private new string name;
 
     [Header("Shooting")]
-    public int damage;
-    public float maxDistance;
+    [SerializeField] private int _damage;
+    [SerializeField] private float _maxDistance;
+    [SerializeField] private float _fireRate;
+        
 
-    [Header("Reloading")]
-    public int currentAmmo;
-    public int magSize;
-    [Tooltip("In RPM")] public float fireRate;
-    public float reloadTime;
-    [HideInInspector] public bool reloading;
+    public string Name => name;
+    public int Damage => _damage;
+    public float MaxDistance => _maxDistance;
+    public float FireRate => _fireRate;
 }

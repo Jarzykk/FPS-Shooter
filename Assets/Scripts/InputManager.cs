@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerMovement), typeof(PlayerLook), typeof(PlayerShooting))]
+[RequireComponent(typeof(PlayerMovement), typeof(PlayerLook))]
 public class InputManager : MonoBehaviour
 {
     private PlayerInput _playerInput;
@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
     private PlayerShooting _playerShooting;
 
     public event UnityAction ShootButtonPressed;
+    public event UnityAction EquipNextWeaponPressed;
+    public event UnityAction EquipPreviousWeaponPressed;
 
     private void Awake()
     {
@@ -23,7 +25,6 @@ public class InputManager : MonoBehaviour
 
         _playerMovement = GetComponent<PlayerMovement>();
         _playerLook = GetComponent<PlayerLook>();
-        _playerShooting = GetComponent<PlayerShooting>();
     }
 
     private void OnEnable()
@@ -32,8 +33,10 @@ public class InputManager : MonoBehaviour
         _playerInput.OnFoot.Jump.performed += ctx => _playerMovement.Jump();
         _playerInput.OnFoot.Sprint.performed += ctx => _playerMovement.ChangeSprintStance();
         _playerInput.OnFoot.Sprint.canceled += ctx => _playerMovement.ChangeSprintStance();
-        //_playerInput.OnFoot.Shoot.performed += ctx => _playerShooting.Shoot();
         _playerInput.OnFoot.Shoot.performed += ctx => OnShootButtonPressed();
+
+        _playerInput.OnFoot.EquipNextWeapon.performed += ctx => OnEquipNextWeaponPressed();
+        _playerInput.OnFoot.EquipPreviousWeapon.performed += ctx => OnEquipPreviousWeaponPressed();
     }
 
     private void OnDisable()
@@ -42,8 +45,10 @@ public class InputManager : MonoBehaviour
         _playerInput.OnFoot.Jump.performed -= ctx => _playerMovement.Jump();
         _playerInput.OnFoot.Sprint.performed -= ctx => _playerMovement.ChangeSprintStance();
         _playerInput.OnFoot.Sprint.canceled -= ctx => _playerMovement.ChangeSprintStance();
-        //_playerInput.OnFoot.Shoot.performed -= ctx => _playerShooting.Shoot();
         _playerInput.OnFoot.Shoot.performed -= ctx => OnShootButtonPressed();
+        _playerInput.OnFoot.EquipNextWeapon.performed -= ctx => OnEquipNextWeaponPressed();
+        _playerInput.OnFoot.EquipPreviousWeapon.performed -= ctx => OnEquipPreviousWeaponPressed();
+
     }
 
     private void FixedUpdate()
@@ -59,5 +64,15 @@ public class InputManager : MonoBehaviour
     private void OnShootButtonPressed()
     {
         ShootButtonPressed?.Invoke();
+    }
+
+    private void OnEquipNextWeaponPressed()
+    {
+        EquipNextWeaponPressed?.Invoke();
+    }
+
+    private void OnEquipPreviousWeaponPressed()
+    {
+        EquipPreviousWeaponPressed?.Invoke();
     }
 }

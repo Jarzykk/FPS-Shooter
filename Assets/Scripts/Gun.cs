@@ -7,9 +7,10 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] private GunData gunData;
     [SerializeField] private InputManager _inputManager;
+    [SerializeField] private Camera _shootCamera;
 
     private float _timeSinceLastShot = 0;
-    private bool _canShoot => _timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+    private bool _canShoot => _timeSinceLastShot > 1f / (gunData.FireRate / 60f);
 
     private void OnEnable()
     {
@@ -28,15 +29,14 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
-        if(gunData.currentAmmo > 0 && _canShoot)
+        if(_canShoot)
         {
-            if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, gunData.maxDistance))
+            if(Physics.Raycast(_shootCamera.transform.position, _shootCamera.transform.forward, out RaycastHit hitInfo, gunData.MaxDistance))
             {
                 IDamageable damageable = hitInfo.transform.GetComponent<IDamageable>();
-                damageable?.TakeDamage(gunData.damage);
+                damageable?.TakeDamage(gunData.Damage);
             }
 
-            gunData.currentAmmo--;
             _timeSinceLastShot = 0;
 
             OnGunShot();

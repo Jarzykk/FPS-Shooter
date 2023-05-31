@@ -71,6 +71,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipNextWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""084b80c9-123b-43e3-8e7f-69f72da3b82f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipPreviousWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""5164bbb2-c090-45be-9a4c-92ca95ff3a47"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +190,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6c3d4cb-4ec3-49b6-ae5b-b89f74ee7ae6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipNextWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36e2384f-c428-49b0-9a20-15f008041992"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipPreviousWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +225,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Sprint = m_OnFoot.FindAction("Sprint", throwIfNotFound: true);
         m_OnFoot_Shoot = m_OnFoot.FindAction("Shoot", throwIfNotFound: true);
+        m_OnFoot_EquipNextWeapon = m_OnFoot.FindAction("EquipNextWeapon", throwIfNotFound: true);
+        m_OnFoot_EquipPreviousWeapon = m_OnFoot.FindAction("EquipPreviousWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +291,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Look;
     private readonly InputAction m_OnFoot_Sprint;
     private readonly InputAction m_OnFoot_Shoot;
+    private readonly InputAction m_OnFoot_EquipNextWeapon;
+    private readonly InputAction m_OnFoot_EquipPreviousWeapon;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -258,6 +302,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_OnFoot_Look;
         public InputAction @Sprint => m_Wrapper.m_OnFoot_Sprint;
         public InputAction @Shoot => m_Wrapper.m_OnFoot_Shoot;
+        public InputAction @EquipNextWeapon => m_Wrapper.m_OnFoot_EquipNextWeapon;
+        public InputAction @EquipPreviousWeapon => m_Wrapper.m_OnFoot_EquipPreviousWeapon;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -282,6 +328,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnShoot;
+                @EquipNextWeapon.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnEquipNextWeapon;
+                @EquipNextWeapon.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnEquipNextWeapon;
+                @EquipNextWeapon.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnEquipNextWeapon;
+                @EquipPreviousWeapon.started -= m_Wrapper.m_OnFootActionsCallbackInterface.OnEquipPreviousWeapon;
+                @EquipPreviousWeapon.performed -= m_Wrapper.m_OnFootActionsCallbackInterface.OnEquipPreviousWeapon;
+                @EquipPreviousWeapon.canceled -= m_Wrapper.m_OnFootActionsCallbackInterface.OnEquipPreviousWeapon;
             }
             m_Wrapper.m_OnFootActionsCallbackInterface = instance;
             if (instance != null)
@@ -301,6 +353,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @EquipNextWeapon.started += instance.OnEquipNextWeapon;
+                @EquipNextWeapon.performed += instance.OnEquipNextWeapon;
+                @EquipNextWeapon.canceled += instance.OnEquipNextWeapon;
+                @EquipPreviousWeapon.started += instance.OnEquipPreviousWeapon;
+                @EquipPreviousWeapon.performed += instance.OnEquipPreviousWeapon;
+                @EquipPreviousWeapon.canceled += instance.OnEquipPreviousWeapon;
             }
         }
     }
@@ -312,5 +370,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnEquipNextWeapon(InputAction.CallbackContext context);
+        void OnEquipPreviousWeapon(InputAction.CallbackContext context);
     }
 }
