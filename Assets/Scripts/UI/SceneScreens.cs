@@ -7,6 +7,7 @@ public class SceneScreens : MonoBehaviour
 {
     [SerializeField] private WinScreen _winScreen;
     [SerializeField] private LooseScreen _looseScreen;
+    [SerializeField] private float _delayBeforeShowScreen = 3f;
     [SerializeField] private ImportantSceneObjects _importantSceneObjects;
 
     private void OnEnable()
@@ -34,11 +35,24 @@ public class SceneScreens : MonoBehaviour
 
     private void EnableWinScreen()
     {
-        _winScreen.gameObject.SetActive(true);
+        StartCoroutine(ShowScreenAfterDelay(_delayBeforeShowScreen, _winScreen));
     }
 
     private void EnableLooseScreen()
     {
-        _looseScreen.gameObject.SetActive(true);
+        StartCoroutine(ShowScreenAfterDelay(_delayBeforeShowScreen, _looseScreen));
+    }
+
+    private IEnumerator ShowScreenAfterDelay(float delay, UIScreen screen)
+    {
+        float elapsedTime = 0;
+
+        while(elapsedTime <= delay)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        screen.gameObject.SetActive(true);
     }
 }
