@@ -433,7 +433,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
@@ -5888,6 +5888,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1819569545}
+    - target: {fileID: 8474773231769581406, guid: 1e7d35def3bccf34e9da4128b7031a38, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e7d35def3bccf34e9da4128b7031a38, type: 3}
 --- !u!1 &5386804825690889881

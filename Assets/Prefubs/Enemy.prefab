@@ -567,6 +567,7 @@ GameObject:
   - component: {fileID: 8474773231769581394}
   - component: {fileID: 8474773231769581395}
   - component: {fileID: 8474773231769581388}
+  - component: {fileID: 2475011888540625948}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -709,6 +710,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 8474773231769581396}
+  _sightChecker: {fileID: 2475011888540625948}
+  _LostTargetDelayTransin: 3
 --- !u!114 &8474773231769581396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 8474773231769581399}
+  _sightChecker: {fileID: 2475011888540625948}
 --- !u!114 &8474773231769581399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,6 +755,7 @@ MonoBehaviour:
   _transitions:
   - {fileID: 8474773231769581398}
   - {fileID: 8474773231769581397}
+  _targetSightChecker: {fileID: 2475011888540625948}
   _rotationSpeed: 5
   _accuracyOffset: 3
 --- !u!114 &8474773231769581398
@@ -837,6 +842,18 @@ MonoBehaviour:
   _persueState: {fileID: 8474773231769581396}
   _attackState: {fileID: 8474773231769581399}
   _health: {fileID: 8474773231769581401}
+--- !u!114 &2475011888540625948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474773231760049385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb48abcc73e373a4693dbf8c5cddd707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8474773231760049387
 GameObject:
   m_ObjectHideFlags: 0

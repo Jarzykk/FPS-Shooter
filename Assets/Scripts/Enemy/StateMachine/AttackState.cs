@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Enemy))]
 public class AttackState : State
 {
+    [SerializeField] private TargetSightChecker _targetSightChecker;
     [SerializeField] private float _rotationSpeed = 7f;
     [SerializeField, Range(0, 100)] private int _accuracyOffset = 3;
 
@@ -24,7 +25,7 @@ public class AttackState : State
 
     private void FixedUpdate()
     {
-        _aimAtPlayer = CkeckIfAimingToPlayer();
+        _aimAtPlayer = _targetSightChecker.CanAimAtPlayer;
         Rotate(_enemy.TargetsTranform);
 
         if(_aimAtPlayer)
@@ -36,28 +37,6 @@ public class AttackState : State
         Vector3 direction = targetTransform.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _rotationSpeed * Time.deltaTime);
-    }
-
-    private bool CkeckIfAimingToPlayer()
-    {
-        Vector3 targetDirection = _enemy.TargetsTranform.position - _enemy.EysPosition.position;
-        float angleToPlayer = Vector3.Angle(transform.forward, targetDirection);
-
-        if (angleToPlayer >= -_enemy.FieldOfView && angleToPlayer <= _enemy.FieldOfView)
-        {
-            Ray ray = new Ray(_enemy.EysPosition.position, targetDirection * _enemy.SightDistance);
-            RaycastHit hitInfo = new RaycastHit();
-
-            if (Physics.Raycast(ray, out hitInfo, _enemy.SightDistance))
-            {
-                if (hitInfo.transform.GetComponent<Player>())
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     private void TryShoot()
