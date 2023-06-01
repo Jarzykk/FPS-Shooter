@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackDistance: 30
   _damage: 1
-  _attackRate: 1
+  _attackRate: 2

@@ -27,7 +27,9 @@ public class PersueState : State
 
     private void OnDisable()
     {
-        _navMeshAgent.isStopped = true;
+        if(_navMeshAgent.isActiveAndEnabled)
+            _navMeshAgent.isStopped = true;
+
         StoppedMovement?.Invoke();
     }
 
