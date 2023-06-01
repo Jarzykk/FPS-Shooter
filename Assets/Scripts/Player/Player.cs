@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Health _health;
     [SerializeField] private PlayersInventory _inventory;
     [SerializeField] private InputManager _inputManager;
+    [SerializeField] private ImportantSceneObjects _importantSceneObjects;
 
     private bool _isAlive => _health.CurrentHealth > 0;
 
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
         _health.Died += OnDeath;
         _inventory.WeaponSwitched += OnWeaponChanged;
         _inventory.AmmoAmountChanged += OnAmmoAmountChanged;
+        _importantSceneObjects.LevelConditions.LevelEnded += DisableInput;
     }
 
     private void OnDisable()
@@ -31,25 +33,26 @@ public class Player : MonoBehaviour
         _inventory.WeaponSwitched -= OnWeaponChanged;
         _inventory.AmmoAmountChanged -= OnAmmoAmountChanged;
         _health.Died -= OnDeath;
+        _importantSceneObjects.LevelConditions.LevelEnded -= DisableInput;
     }
 
     private void OnDeath()
     {
-        _inputManager.DisableControlls();
+        DisableInput();
         Died?.Invoke();
     }
 
-    public void TakeDamage(int damage)
+    private void DisableInput()
     {
-        _health.TakeDamage(damage);
+        _inputManager.DisableControlls();
     }
 
-    public void OnWeaponChanged()
+    private void OnWeaponChanged()
     {
         WeaponChanged?.Invoke();
     }
 
-    public void OnAmmoAmountChanged()
+    private void OnAmmoAmountChanged()
     {
         AmmoAmountChanged?.Invoke();
     }

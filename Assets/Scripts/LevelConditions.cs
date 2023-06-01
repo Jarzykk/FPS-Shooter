@@ -9,6 +9,7 @@ public class LevelConditions : MonoBehaviour
 
     public event UnityAction PlayerWon;
     public event UnityAction PlayerLoose;
+    public event UnityAction LevelEnded;
 
     private void OnEnable()
     {
@@ -26,11 +27,13 @@ public class LevelConditions : MonoBehaviour
     {
         Debug.Log("Player won");
         PlayerWon?.Invoke();
+        LevelEnded?.Invoke();
     }
 
     private void OnPlayerDeath()
     {
         Debug.Log("Player loose");
         PlayerLoose?.Invoke();
+        LevelEnded?.Invoke();
     }
 }
