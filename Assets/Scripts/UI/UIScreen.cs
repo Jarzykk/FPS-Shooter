@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[DefaultExecutionOrder(3)]
 public abstract class UIScreen : MonoBehaviour
 {
     [SerializeField] private ImportantSceneObjects _importantSceneObjects;
@@ -19,6 +20,8 @@ public abstract class UIScreen : MonoBehaviour
         _exitButton.onClick.AddListener(ExitGame);
 
         _importantSceneObjects.PlayerScore.ScoreUpdated += SetScore;
+
+        SetScore();
     }
 
     private void OnDisable()

@@ -5193,8 +5193,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gunsGroup: {fileID: 567120037}
   _weaponSwitching: {fileID: 567120036}
-  _minBulletsAmount: 3
-  _maxBulletsAmount: 5
+  _minBulletsAmount: 20
+  _maxBulletsAmount: 50
 --- !u!114 &1819569544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5549,7 +5549,7 @@ MonoBehaviour:
   _player: {fileID: 1819569545}
   _enemyGroup: {fileID: 195362273}
   _levelConditions: {fileID: 1971917786}
-  _playerScore: {fileID: 0}
+  _playerScore: {fileID: 1971917787}
 --- !u!4 &1971917785
 Transform:
   m_ObjectHideFlags: 0
@@ -8815,6 +8815,10 @@ PrefabInstance:
     - target: {fileID: 8474773231760049385, guid: 1e7d35def3bccf34e9da4128b7031a38, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8474773231769581399, guid: 1e7d35def3bccf34e9da4128b7031a38, type: 3}
+      propertyPath: _accuracyOffset
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8474773231769581402, guid: 1e7d35def3bccf34e9da4128b7031a38, type: 3}
       propertyPath: _enemyGroup

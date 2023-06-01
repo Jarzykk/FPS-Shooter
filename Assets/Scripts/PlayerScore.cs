@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[DefaultExecutionOrder(0)]
 public class PlayerScore : MonoBehaviour
 {
     [SerializeField] private ImportantSceneObjects _importantSceneObjects;
@@ -44,7 +45,7 @@ public class PlayerScore : MonoBehaviour
     private void OnPlayerLoose()
     {
         _playerLooseAmount++;
-        ScoreUpdated.Invoke();
+        ScoreUpdated?.Invoke();
 
         Save();
     }

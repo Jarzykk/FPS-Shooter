@@ -8,7 +8,7 @@ public class AttackState : State
 {
     [SerializeField] private TargetSightChecker _targetSightChecker;
     [SerializeField] private float _rotationSpeed = 7f;
-    [SerializeField, Range(0, 100)] private int _accuracyOffset = 3;
+    [SerializeField, Range(0f, 100f)] private float _accuracyOffset = 1.5f;
 
     private bool _attackIsOnCooldown = false;
     private float _attackRate => _enemy.AttackRate;
@@ -44,7 +44,7 @@ public class AttackState : State
         if(_attackIsOnCooldown == false)
         {
             Vector3 targetDirection = _enemy.TargetsTranform.position - _enemy.EysPosition.position;
-            int accuracyOffset = Random.Range(-_accuracyOffset, _accuracyOffset);
+            float accuracyOffset = Random.Range(-_accuracyOffset, _accuracyOffset);
             Vector3 vectorAccuracyOffset = new Vector3(accuracyOffset, accuracyOffset, accuracyOffset);
             targetDirection += vectorAccuracyOffset;
 

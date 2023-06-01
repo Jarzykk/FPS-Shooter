@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2819619cb091847966409c70c96a28, type: 3}
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
-  _damage: 30
+  _damage: 20
   _maxDistance: 200
   _fireRate: 500
   _bulletType: {fileID: 11400000, guid: 666dfdcf080bced4b854da8b2d087e3e, type: 2}

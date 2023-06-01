@@ -757,7 +757,7 @@ MonoBehaviour:
   - {fileID: 8474773231769581397}
   _targetSightChecker: {fileID: 2475011888540625948}
   _rotationSpeed: 5
-  _accuracyOffset: 2
+  _accuracyOffset: 1.5
 --- !u!114 &8474773231769581398
 MonoBehaviour:
   m_ObjectHideFlags: 0
