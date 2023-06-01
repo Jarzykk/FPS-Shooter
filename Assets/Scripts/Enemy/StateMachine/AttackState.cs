@@ -30,8 +30,6 @@ public class AttackState : State
 
         if(_aimAtPlayer)
             TryShoot();
-
-        Debug.Log(_aimAtPlayer);
     }
 
     private void Rotate(Transform targetTransform)
