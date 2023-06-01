@@ -9,12 +9,14 @@ public class EnemyAnimation : MonoBehaviour
 
     private const string _shootTriggerName = "Shoot";
     private const string _runningBoolName = "IsRunning";
+    private const string _deathTriggerName = "IsDead";
 
     private void OnEnable()
     {
         _enemy.Shoot += OnShoot;
         _enemy.StartedMovement += OnStartedMovement;
         _enemy.StoppedMovement += OnStoppedMovement;
+        _enemy.Died += OnDeath;
     }
 
     private void OnDisable()
@@ -22,6 +24,7 @@ public class EnemyAnimation : MonoBehaviour
         _enemy.Shoot -= OnShoot;
         _enemy.StartedMovement -= OnStartedMovement;
         _enemy.StoppedMovement -= OnStoppedMovement;
+        _enemy.Died -= OnDeath;
     }
 
     private void OnShoot()
@@ -37,5 +40,10 @@ public class EnemyAnimation : MonoBehaviour
     private void OnStoppedMovement()
     {
         _animator.SetBool(_runningBoolName, false);
+    }
+
+    private void OnDeath()
+    {
+        _animator.SetTrigger(_deathTriggerName);
     }
 }

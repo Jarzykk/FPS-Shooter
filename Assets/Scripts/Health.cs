@@ -30,7 +30,6 @@ public class Health : MonoBehaviour, IDamageable
             {
                 _isDead = true;
                 Died?.Invoke();
-                Destroy(gameObject);
             }
         }
     }

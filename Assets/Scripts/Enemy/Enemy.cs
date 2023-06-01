@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform _eysPosition;
     [SerializeField] private PersueState _persueState;
     [SerializeField] private AttackState _attackState;
+    [SerializeField] private Health _health;
+    [SerializeField] private Collider _collider;
+    [SerializeField] private StateMachine _stateMachine;
 
     public float AttackDistance => _attackDistance;
     public Player Player => _player;
@@ -27,12 +30,14 @@ public class Enemy : MonoBehaviour
     public event UnityAction Shoot;
     public event UnityAction StartedMovement;
     public event UnityAction StoppedMovement;
+    public event UnityAction Died;
 
     private void OnEnable()
     {
         _attackState.Shoot += OnShoot;
         _persueState.StartedMovement += OnStartedMovement;
         _persueState.StoppedMovement += OnStoppedMovement;
+        _health.Died += OnDeath;
     }
 
     private void OnDisable()
@@ -40,6 +45,7 @@ public class Enemy : MonoBehaviour
         _attackState.Shoot -= OnShoot;
         _persueState.StartedMovement -= OnStartedMovement;
         _persueState.StoppedMovement -= OnStoppedMovement;
+        _health.Died -= OnDeath;
     }
 
     private void OnShoot()
@@ -55,5 +61,12 @@ public class Enemy : MonoBehaviour
     private void OnStoppedMovement()
     {
         StoppedMovement?.Invoke();
+    }
+
+    private void OnDeath()
+    {
+        _collider.enabled = false;
+        _stateMachine.DisableStateMachine();
+        Died?.Invoke();
     }
 }

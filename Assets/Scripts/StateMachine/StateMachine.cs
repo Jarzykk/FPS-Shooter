@@ -16,6 +16,11 @@ public class StateMachine : MonoBehaviour
         StartCoroutine(StartMachineAfterDelay());
     }
 
+    private void OnDisable()
+    {
+        DisableStateMachine();
+    }
+
     private void Update()
     {
         if (_current == null)
