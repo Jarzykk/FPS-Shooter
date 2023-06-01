@@ -5,9 +5,7 @@ using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float _attackDistance;
-    [SerializeField] private int _damage;
-    [SerializeField] private float _attackRate;
+    [SerializeField] private EnemyData _enemyData;
     [SerializeField] private Player _player;
     [SerializeField] private float _fieldOfView;
     [SerializeField] private float _sightDistance;
@@ -17,6 +15,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Health _health;
     [SerializeField] private Collider _collider;
     [SerializeField] private StateMachine _stateMachine;
+
+    private float _attackDistance;
+    private int _damage;
+    private float _attackRate;
 
     public float AttackDistance => _attackDistance;
     public Player Player => _player;
@@ -31,6 +33,11 @@ public class Enemy : MonoBehaviour
     public event UnityAction StartedMovement;
     public event UnityAction StoppedMovement;
     public event UnityAction Died;
+
+    private void Awake()
+    {
+        SetValuesFromEnemyData();
+    }
 
     private void OnEnable()
     {
@@ -68,5 +75,12 @@ public class Enemy : MonoBehaviour
         _collider.enabled = false;
         _stateMachine.DisableStateMachine();
         Died?.Invoke();
+    }
+
+    private void SetValuesFromEnemyData()
+    {
+        _attackDistance = _enemyData.AttackDistance;
+        _attackRate = _enemyData.AttackRate;
+        _damage = _enemyData.Damage;
     }
 }

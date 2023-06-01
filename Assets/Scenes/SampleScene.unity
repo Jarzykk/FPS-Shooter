@@ -1604,9 +1604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60417e918858ab4c928fe23cd46f3c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDistance: 20
-  _damage: 1
-  _attackRate: 0.3
+  _enemyData: {fileID: 11400000, guid: a516f5916714fde4b90ba3e9b2f6b90c, type: 2}
   _player: {fileID: 1819569545}
   _fieldOfView: 85
   _sightDistance: 50
@@ -7462,9 +7460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60417e918858ab4c928fe23cd46f3c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDistance: 20
-  _damage: 1
-  _attackRate: 0.3
+  _enemyData: {fileID: 11400000, guid: a516f5916714fde4b90ba3e9b2f6b90c, type: 2}
   _player: {fileID: 1819569545}
   _fieldOfView: 85
   _sightDistance: 50
