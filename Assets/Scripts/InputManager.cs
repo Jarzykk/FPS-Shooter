@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement), typeof(PlayerLook))]
 public class InputManager : MonoBehaviour
@@ -12,7 +9,6 @@ public class InputManager : MonoBehaviour
 
     private PlayerMovement _playerMovement;
     private PlayerLook _playerLook;
-    private PlayerShooting _playerShooting;
 
     public event UnityAction ShootButtonPressed;
     public event UnityAction EquipNextWeaponPressed;
