@@ -10,7 +10,7 @@ public class AttackState : State
     [SerializeField, Range(0, 100)] private int _accuracyOffset = 3;
 
     private bool _attackIsOnCooldown = false;
-    private float _attackRate;
+    private float _attackRate => _enemy.AttackRate;
     private bool _aimAtPlayer;
 
     private Enemy _enemy;
@@ -20,7 +20,6 @@ public class AttackState : State
     private void Awake()
     {
         _enemy = GetComponent<Enemy>();
-        _attackRate = _enemy.AttackRate;
     }
 
     private void FixedUpdate()
@@ -82,6 +81,7 @@ public class AttackState : State
                 }
             }
 
+            Debug.Log("Shoot!");
             Shoot?.Invoke();
             StartCoroutine(CountAttackCooldown(_attackRate));
         }
@@ -92,7 +92,7 @@ public class AttackState : State
         float elapsedTime = 0;
         _attackIsOnCooldown = true;
 
-        while(elapsedTime <= attackRate)
+        while (elapsedTime <= attackRate)
         {
             elapsedTime += Time.deltaTime;
             yield return null;

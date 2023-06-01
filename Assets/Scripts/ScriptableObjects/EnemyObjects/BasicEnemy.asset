@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BasicEnemy
   m_EditorClassIdentifier: 
   _attackDistance: 30
-  _damage: 12
-  _attackRate: 1.5
+  _damage: 1
+  _attackRate: 1
