@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerScore : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class PlayerScore : MonoBehaviour
     private int _playerWonAmount;
     private int _playerLooseAmount;
     private const string _saveKey = "PlayerScore";
+
+    public int PlayerWonAmount => _playerWonAmount;
+    public int PlayerLooseAmount => _playerLooseAmount;
+
+    public event UnityAction ScoreUpdated;
 
     private void OnEnable()
     {
@@ -25,12 +31,12 @@ public class PlayerScore : MonoBehaviour
     private void Start()
     {
         Load();
-        //Save();
     }
 
     private void OnPlayerWon()
     {
         _playerWonAmount++;
+        ScoreUpdated?.Invoke();
 
         Save();
     }
@@ -38,6 +44,7 @@ public class PlayerScore : MonoBehaviour
     private void OnPlayerLoose()
     {
         _playerLooseAmount++;
+        ScoreUpdated.Invoke();
 
         Save();
     }

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+[DefaultExecutionOrder(0)]
 public class PlayersInventory : MonoBehaviour
 {
     [SerializeField] private GunsGroup _gunsGroup;
@@ -13,9 +15,13 @@ public class PlayersInventory : MonoBehaviour
     private BulletMagazine[] _bulletMagazines;
 
     public Gun[] Guns => _gunsGroup.Guns;
-    public Bullet[] Bullets => _bullets;
+    public int CurrentMagazineBulletsAmount => _currentBulletMagazine.BulletAmount;
 
     private Gun _currentGun;
+    private BulletMagazine _currentBulletMagazine;
+
+    public event UnityAction AmmoAmountChanged;
+    public event UnityAction WeaponSwitched;
 
     private void OnEnable()
     {
@@ -71,6 +77,19 @@ public class PlayersInventory : MonoBehaviour
         return bulletAmount;
     }
 
+    private BulletMagazine GetBulletMagazine(Gun gun)
+    {
+        BulletMagazine bulletMagazine = null;
+
+        foreach (var magazine in _bulletMagazines)
+        {
+            if (gun.BulletType == magazine.BulletType)
+                bulletMagazine = magazine;
+        }
+
+        return bulletMagazine;
+    }
+
     private void OnWeaponSwitched(Gun gun)
     {
         if(_currentGun != null)
@@ -78,6 +97,10 @@ public class PlayersInventory : MonoBehaviour
 
         _currentGun = gun;
         _currentGun.ShootPerformed += OnGunShoot;
+
+        _currentBulletMagazine = GetBulletMagazine(_currentGun);
+
+        WeaponSwitched?.Invoke();
     }
 
     private void OnGunShoot()
@@ -97,5 +120,7 @@ public class PlayersInventory : MonoBehaviour
                 break;
             }
         }
+
+        AmmoAmountChanged?.Invoke();
     }
 }

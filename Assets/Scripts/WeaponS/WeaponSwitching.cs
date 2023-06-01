@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[DefaultExecutionOrder(1)]
 public class WeaponSwitching : MonoBehaviour
 {
     [SerializeField] private PlayersInventory _playerInventory;

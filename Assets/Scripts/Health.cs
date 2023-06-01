@@ -13,6 +13,7 @@ public class Health : MonoBehaviour, IDamageable
     public int CurrentHealth => _currentHealth;
 
     public event UnityAction Died;
+    public event UnityAction HealthChanged;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class Health : MonoBehaviour, IDamageable
         if (_isDead == false)
         {
             _currentHealth -= damage;
+            HealthChanged?.Invoke();
 
             if (_currentHealth <= 0)
             {

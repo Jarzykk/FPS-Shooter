@@ -54,7 +54,6 @@ public class Gun : MonoBehaviour
 
     private void OnGunShot()
     {
-        _playerInventory.RemoveBullet(_gunData.BulletType);
         ShootPerformed?.Invoke();
     }
 }
