@@ -6,12 +6,11 @@ using UnityEngine.Events;
 
 public class WeaponSwitching : MonoBehaviour
 {
-    [SerializeField] private Gun[] _guns;
+    [SerializeField] private PlayersInventory _playerInventory;
     [SerializeField] private float switchTime;
     [SerializeField] private InputManager _inputManager;
 
     private Gun _selectedWeapon;
-    private float _timeSinceLastSwitch;
 
     private int _currentWeaponIndex;
     public event UnityAction<Gun> WeapoSwitched;
@@ -30,35 +29,36 @@ public class WeaponSwitching : MonoBehaviour
 
     private void Start()
     {
+        DisableAllWeapons();
+
         _currentWeaponIndex = 0;
         ChangeWeapon(_currentWeaponIndex);
     }
 
     private void ChangeWeapon(int index)
     {
+        if (_selectedWeapon != null)
+            _selectedWeapon.gameObject.SetActive(false);
+
+
         _currentWeaponIndex = index;
 
-        _selectedWeapon = _guns[_currentWeaponIndex];
+        _selectedWeapon = _playerInventory.Guns[_currentWeaponIndex];
         _selectedWeapon.gameObject.SetActive(true);
         WeapoSwitched?.Invoke(_selectedWeapon);
-
-        DisableNotSelectedWeapons();
     }
 
-    private void DisableNotSelectedWeapons()
+    private void DisableAllWeapons()
     {
-        foreach (var gun in _guns)
+        foreach (var gun in _playerInventory.Guns)
         {
-            if (gun != _selectedWeapon)
-            {
-                gun.gameObject.SetActive(false);
-            }
+            gun.gameObject.SetActive(false);
         }
     }
 
     private void EquipNextWeapon()
     {
-        if (_currentWeaponIndex == _guns.Length - 1)
+        if (_currentWeaponIndex == _playerInventory.Guns.Length - 1)
             _currentWeaponIndex = 0;
         else
             _currentWeaponIndex++;
@@ -69,7 +69,7 @@ public class WeaponSwitching : MonoBehaviour
     private void EquipPreviousWeapon()
     {
         if (_currentWeaponIndex == 0)
-            _currentWeaponIndex = _guns.Length - 1;
+            _currentWeaponIndex = _playerInventory.Guns.Length - 1;
         else
             _currentWeaponIndex--;
 

@@ -1007,10 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1736d1ff5e140149af8fc9e759e0bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guns:
-  - {fileID: 632690024}
-  - {fileID: 168580948}
-  - {fileID: 3271977788021962110}
+  _playerInventory: {fileID: 1819569539}
   switchTime: 1
   _inputManager: {fileID: 1819569525}
 --- !u!114 &567120037
@@ -3240,10 +3237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41280455b3567a4bad74c2d5ea41a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _guns:
-  - {fileID: 168580948}
-  - {fileID: 632690024}
-  - {fileID: 3271977788021962110}
+  _gunsGroup: {fileID: 567120037}
   _weaponSwitching: {fileID: 567120036}
 --- !u!114 &1819569544
 MonoBehaviour:

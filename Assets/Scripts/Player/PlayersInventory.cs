@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayersInventory : MonoBehaviour
 {
-    [SerializeField] private Gun[] _guns;
+    [SerializeField] private GunsGroup _gunsGroup;
     [SerializeField] private WeaponSwitching _weaponSwitching;
 
     private Bullet[] _bullets;
     private BulletMagazine[] _bulletMagazines;
 
-    public Gun[] Guns => _guns;
+    public Gun[] Guns => _gunsGroup.Guns;
     public Bullet[] Bullets => _bullets;
 
     private Gun _currentGun;
@@ -34,11 +34,11 @@ public class PlayersInventory : MonoBehaviour
 
     private void SetBullets()
     {
-        _bullets = new Bullet[_guns.Length];
+        _bullets = new Bullet[_gunsGroup.Guns.Length];
 
         for (int i = 0; i < _bullets.Length; i++)
         {
-            _bullets[i] = _guns[i].BulletType;
+            _bullets[i] = _gunsGroup.Guns[i].BulletType;
         }
     }
 
