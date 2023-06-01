@@ -44,7 +44,7 @@ public class AttackState : State
         if(_attackIsOnCooldown == false)
         {
             Vector3 targetDirection = _enemy.TargetsTranform.position - _enemy.EysPosition.position;
-            int accuracyOffset = Random.Range(0, _accuracyOffset);
+            int accuracyOffset = Random.Range(-_accuracyOffset, _accuracyOffset);
             Vector3 vectorAccuracyOffset = new Vector3(accuracyOffset, accuracyOffset, accuracyOffset);
             targetDirection += vectorAccuracyOffset;
 
