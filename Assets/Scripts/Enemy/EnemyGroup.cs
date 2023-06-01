@@ -6,10 +6,13 @@ using UnityEngine.Events;
 public class EnemyGroup : MonoBehaviour
 {
     [SerializeField] private Enemy[] _enemies;
+    [SerializeField] private ImportantSceneObjects _inportantSceneObjects;
+
 
     private int _deadEnemiesCount = 0;
 
     public event UnityAction AllEnemiesDead;
+    public Player Player => _inportantSceneObjects.Player;
 
     private void OnEnable()
     {

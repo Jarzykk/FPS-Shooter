@@ -5,9 +5,10 @@ using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private EnemyGroup _enemyGroup;
     [SerializeField] private EnemyData _enemyData;
     [SerializeField] private EnemyConditions _conditions;
-    [SerializeField] private Player _player;
+    private Player _player;
     [SerializeField] private float _fieldOfView;
     [SerializeField] private float _sightDistance;
     [SerializeField] private Transform _eysPosition;
@@ -32,6 +33,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        _player = _enemyGroup.Player;
         SetValuesFromEnemyData();
     }
 

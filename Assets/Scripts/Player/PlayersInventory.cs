@@ -6,6 +6,8 @@ public class PlayersInventory : MonoBehaviour
 {
     [SerializeField] private GunsGroup _gunsGroup;
     [SerializeField] private WeaponSwitching _weaponSwitching;
+    [SerializeField] private int _minBulletsAmount = 30;
+    [SerializeField] private int _maxBulletsAmount = 120;
 
     private Bullet[] _bullets;
     private BulletMagazine[] _bulletMagazines;
@@ -44,14 +46,11 @@ public class PlayersInventory : MonoBehaviour
 
     private void CreateMagazines()
     {
-        int minBulletAmount = 10;
-        int maxBulletAmount = 15;
-
         _bulletMagazines = new BulletMagazine[_bullets.Length];
 
         for (int i = 0; i < _bulletMagazines.Length; i++)
         {
-            int bulletsAmount = Random.Range(minBulletAmount, maxBulletAmount);
+            int bulletsAmount = Random.Range(_minBulletsAmount, _maxBulletsAmount);
             _bulletMagazines[i] = new BulletMagazine(_bullets[i], bulletsAmount);
         }
     }

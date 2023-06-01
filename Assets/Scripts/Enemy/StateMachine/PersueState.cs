@@ -7,16 +7,16 @@ using UnityEngine.Events;
 [RequireComponent(typeof(NavMeshAgent), typeof(Enemy))]
 public class PersueState : State
 {
+    private Enemy _enemy;
     private NavMeshAgent _navMeshAgent;
-    private Player _player;
 
     public event UnityAction StartedMovement;
     public event UnityAction StoppedMovement;
 
     private void Awake()
     {
+        _enemy = GetComponent<Enemy>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _player = GetComponent<Enemy>().Player;
     }
 
     private void OnEnable()
@@ -35,6 +35,6 @@ public class PersueState : State
 
     private void Update()
     {
-        _navMeshAgent.SetDestination(_player.transform.position);
+        _navMeshAgent.SetDestination(_enemy.TargetsTranform.transform.position);
     }
 }

@@ -8,21 +8,19 @@ public class PersuePlayerTransition : Transition
     [SerializeField] private TargetSightChecker _sightChecker;
     [SerializeField] private float _LostTargetDelayTransin = 3f;
 
-    private Player _player;
     private Enemy _enemy;
     private bool _wasAbleToAimInLastFrame;
 
     private void Awake()
     {
-        _player = GetComponent<Enemy>().Player;
         _enemy = GetComponent<Enemy>();
     }
 
     private void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, _enemy.TargetsTranform.transform.position);
 
-        if (_player.IsAlive && distanceToPlayer > _enemy.AttackDistance)
+        if (_enemy.Player.IsAlive && distanceToPlayer > _enemy.AttackDistance)
             NeedTransit = true;
 
         if(_sightChecker.CanAimAtPlayer == false)
@@ -52,7 +50,7 @@ public class PersuePlayerTransition : Transition
             yield return null;
         }
 
-        if (_wasAbleToAimInLastFrame == false && _sightChecker.CanAimAtPlayer == false && _player.IsAlive)
+        if (_wasAbleToAimInLastFrame == false && _sightChecker.CanAimAtPlayer == false && _enemy.Player.IsAlive)
             NeedTransit = true;
     }
 }

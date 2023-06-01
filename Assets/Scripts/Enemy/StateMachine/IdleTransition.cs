@@ -5,16 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class IdleTransition : Transition
 {
-    private Player _player;
+    private Enemy _enemy;
 
     private void Awake()
     {
-        _player = GetComponent<Enemy>().Player;
+        _enemy = GetComponent<Enemy>();
     }
 
     private void Update()
     {
-        if (_player.IsAlive == false)
+        if (_enemy.Player.IsAlive == false)
             NeedTransit = true;
     }
 }
