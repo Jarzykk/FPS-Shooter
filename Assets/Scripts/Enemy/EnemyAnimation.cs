@@ -13,18 +13,18 @@ public class EnemyAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        _enemy.Shoot += OnShoot;
-        _enemy.StartedMovement += OnStartedMovement;
-        _enemy.StoppedMovement += OnStoppedMovement;
-        _enemy.Died += OnDeath;
+        _enemy.EnemyConditions.Shoot += OnShoot;
+        _enemy.EnemyConditions.StartedMovement += OnStartedMovement;
+        _enemy.EnemyConditions.StoppedMovement += OnStoppedMovement;
+        _enemy.EnemyConditions.Died += OnDeath;
     }
 
     private void OnDisable()
     {
-        _enemy.Shoot -= OnShoot;
-        _enemy.StartedMovement -= OnStartedMovement;
-        _enemy.StoppedMovement -= OnStoppedMovement;
-        _enemy.Died -= OnDeath;
+        _enemy.EnemyConditions.Shoot -= OnShoot;
+        _enemy.EnemyConditions.StartedMovement -= OnStartedMovement;
+        _enemy.EnemyConditions.StoppedMovement -= OnStoppedMovement;
+        _enemy.EnemyConditions.Died -= OnDeath;
     }
 
     private void OnShoot()

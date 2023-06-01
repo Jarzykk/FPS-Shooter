@@ -6,13 +6,11 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyData _enemyData;
+    [SerializeField] private EnemyConditions _conditions;
     [SerializeField] private Player _player;
     [SerializeField] private float _fieldOfView;
     [SerializeField] private float _sightDistance;
     [SerializeField] private Transform _eysPosition;
-    [SerializeField] private PersueState _persueState;
-    [SerializeField] private AttackState _attackState;
-    [SerializeField] private Health _health;
     [SerializeField] private Collider _collider;
     [SerializeField] private StateMachine _stateMachine;
 
@@ -28,10 +26,8 @@ public class Enemy : MonoBehaviour
     public float SightDistance => _sightDistance;
     public Transform EysPosition => _eysPosition;
     public int Damage => _damage;
+    public EnemyConditions EnemyConditions => _conditions;
 
-    public event UnityAction Shoot;
-    public event UnityAction StartedMovement;
-    public event UnityAction StoppedMovement;
     public event UnityAction Died;
 
     private void Awake()
@@ -41,33 +37,12 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        _attackState.Shoot += OnShoot;
-        _persueState.StartedMovement += OnStartedMovement;
-        _persueState.StoppedMovement += OnStoppedMovement;
-        _health.Died += OnDeath;
+        _conditions.Died += OnDeath;
     }
 
     private void OnDisable()
     {
-        _attackState.Shoot -= OnShoot;
-        _persueState.StartedMovement -= OnStartedMovement;
-        _persueState.StoppedMovement -= OnStoppedMovement;
-        _health.Died -= OnDeath;
-    }
-
-    private void OnShoot()
-    {
-        Shoot?.Invoke();
-    }
-
-    private void OnStartedMovement()
-    {
-        StartedMovement?.Invoke();
-    }
-
-    private void OnStoppedMovement()
-    {
-        StoppedMovement?.Invoke();
+        _conditions.Died -= OnDeath;
     }
 
     private void OnDeath()

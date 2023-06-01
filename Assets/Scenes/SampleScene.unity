@@ -1585,6 +1585,7 @@ GameObject:
   - component: {fileID: 1116511999}
   - component: {fileID: 1116512007}
   - component: {fileID: 1116512006}
+  - component: {fileID: 1116512011}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Untagged
@@ -1605,13 +1606,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyData: {fileID: 11400000, guid: a516f5916714fde4b90ba3e9b2f6b90c, type: 2}
+  _conditions: {fileID: 1116512011}
   _player: {fileID: 1819569545}
   _fieldOfView: 85
   _sightDistance: 50
   _eysPosition: {fileID: 1975797441}
-  _persueState: {fileID: 1116512003}
-  _attackState: {fileID: 1116512001}
-  _health: {fileID: 1116512000}
   _collider: {fileID: 1116511999}
   _stateMachine: {fileID: 1116511996}
 --- !u!114 &1116511996
@@ -1842,6 +1841,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1116512011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116511994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9010aea2bf39bb942841a4ff0f0febf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persueState: {fileID: 1116512003}
+  _attackState: {fileID: 1116512001}
+  _health: {fileID: 1116512000}
 --- !u!1 &1123520951
 GameObject:
   m_ObjectHideFlags: 0
@@ -7013,6 +7027,7 @@ GameObject:
   - component: {fileID: 4543649127201546637}
   - component: {fileID: 4543649127201546638}
   - component: {fileID: 4543649127201546639}
+  - component: {fileID: 4543649127201546640}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -7461,13 +7476,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyData: {fileID: 11400000, guid: a516f5916714fde4b90ba3e9b2f6b90c, type: 2}
+  _conditions: {fileID: 4543649127201546640}
   _player: {fileID: 1819569545}
   _fieldOfView: 85
   _sightDistance: 50
   _eysPosition: {fileID: 1111743063}
-  _persueState: {fileID: 4543649127201546632}
-  _attackState: {fileID: 4543649127201546635}
-  _health: {fileID: 4543649127201546629}
   _collider: {fileID: 4543649127201546637}
   _stateMachine: {fileID: 4543649127201546628}
 --- !u!114 &4543649127201546631
@@ -7596,6 +7609,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootEffect: {fileID: 1669538671}
   _attackState: {fileID: 4543649127201546635}
+--- !u!114 &4543649127201546640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543649127192187445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9010aea2bf39bb942841a4ff0f0febf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persueState: {fileID: 4543649127201546632}
+  _attackState: {fileID: 4543649127201546635}
+  _health: {fileID: 4543649127201546629}
 --- !u!33 &4571308322362233228
 MeshFilter:
   m_ObjectHideFlags: 0

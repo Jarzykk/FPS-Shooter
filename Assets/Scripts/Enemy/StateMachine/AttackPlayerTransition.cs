@@ -8,7 +8,7 @@ public class AttackPlayerTransition : Transition
     private float _attackRange;
     private Enemy _enemy;
 
-    private void Awake()
+    private void Start()
     {
         _attackRange = GetComponent<Enemy>().AttackDistance;
         _enemy = GetComponent<Enemy>();
