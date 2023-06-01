@@ -50,6 +50,11 @@ public class InputManager : MonoBehaviour
         _playerInput.OnFoot.EquipPreviousWeapon.performed -= ctx => OnEquipPreviousWeaponPressed();
 
     }
+    
+    public void DisableControlls()
+    {
+        _playerInput.Disable();
+    }
 
     private void FixedUpdate()
     {
@@ -74,5 +79,5 @@ public class InputManager : MonoBehaviour
     private void OnEquipPreviousWeaponPressed()
     {
         EquipPreviousWeaponPressed?.Invoke();
-    }
+    }    
 }

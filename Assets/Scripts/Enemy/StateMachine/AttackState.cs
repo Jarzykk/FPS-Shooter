@@ -60,7 +60,6 @@ public class AttackState : State
                 }
             }
 
-            Debug.Log("Shoot!");
             Shoot?.Invoke();
             StartCoroutine(CountAttackCooldown(_attackRate));
         }
