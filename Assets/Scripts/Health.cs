@@ -23,6 +23,10 @@ public class Health : MonoBehaviour, IDamageable
         if (_isDead == false)
         {
             _currentHealth -= damage;
+
+            if (_currentHealth < 0)
+                _currentHealth = 0;
+
             HealthChanged?.Invoke();
 
             if (_currentHealth <= 0)
