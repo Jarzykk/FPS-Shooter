@@ -6,9 +6,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Enemy))]
 public class AttackState : State
 {
-    [SerializeField] private float _rotationSpeed = 5f;
-    [SerializeField] private float _lookDirectionAngle = 7f;
-    [SerializeField, Range(0f, 100f)] private float _accuracy = 33f;
+    [SerializeField] private float _rotationSpeed = 7f;
+    [SerializeField, Range(0, 100)] private int _accuracyOffset = 3;
 
     private bool _attackIsOnCooldown = false;
     private float _attackRate;
@@ -44,15 +43,13 @@ public class AttackState : State
 
     private bool CkeckIfAimingToPlayer()
     {
-        Vector3 targetDirection = _enemy.Player.transform.position - _enemy.EysPosition.position;
+        Vector3 targetDirection = _enemy.TargetsTranform.position - _enemy.EysPosition.position;
         float angleToPlayer = Vector3.Angle(transform.forward, targetDirection);
 
         if (angleToPlayer >= -_enemy.FieldOfView && angleToPlayer <= _enemy.FieldOfView)
         {
-            Debug.Log("InAngle");
             Ray ray = new Ray(_enemy.EysPosition.position, targetDirection * _enemy.SightDistance);
             RaycastHit hitInfo = new RaycastHit();
-            Debug.DrawRay(_enemy.EysPosition.position, targetDirection * _enemy.SightDistance);
 
             if (Physics.Raycast(ray, out hitInfo, _enemy.SightDistance))
             {
@@ -70,14 +67,21 @@ public class AttackState : State
     {
         if(_attackIsOnCooldown == false)
         {
-            float shootAccuracy = Random.Range(0, 100);
-            if(shootAccuracy <= _accuracy)
+            Vector3 targetDirection = _enemy.TargetsTranform.position - _enemy.EysPosition.position;
+            int accuracyOffset = Random.Range(0, _accuracyOffset);
+            Vector3 vectorAccuracyOffset = new Vector3(accuracyOffset, accuracyOffset, accuracyOffset);
+            targetDirection += vectorAccuracyOffset;
+
+            Ray ray = new Ray(_enemy.EysPosition.position, targetDirection * _enemy.SightDistance);
+            RaycastHit hitInfo = new RaycastHit();
+            Debug.DrawRay(_enemy.EysPosition.position, targetDirection * _enemy.SightDistance);
+
+            if (Physics.Raycast(ray, out hitInfo, _enemy.SightDistance))
             {
-                _enemy.Player.TakeDamage(_enemy.Damage);
-            }
-            else
-            {
-                Debug.Log("Missed");
+                if (hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
+                {
+                    iDamageable.TakeDamage(_enemy.Damage);
+                }
             }
 
             Shoot?.Invoke();

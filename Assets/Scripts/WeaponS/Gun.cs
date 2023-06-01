@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private Camera _shootCamera;
     [SerializeField] private PlayersInventory _playerInventory;
+    [SerializeField] private ParticleSystem _shootEffect;
 
     private float _timeSinceLastShot = 0;
     private bool _canShoot => _timeSinceLastShot > 1f / (_gunData.FireRate / 60f);
@@ -45,6 +46,7 @@ public class Gun : MonoBehaviour
                 damageable?.TakeDamage(_gunData.Damage);
             }
 
+            _shootEffect.Play();
             _timeSinceLastShot = 0;
             OnGunShot();
         }

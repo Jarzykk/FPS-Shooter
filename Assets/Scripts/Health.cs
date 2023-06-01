@@ -21,7 +21,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        if(_isDead == false)
+        if (_isDead == false)
         {
             _currentHealth -= damage;
             Debug.Log("Took damage");

@@ -6,17 +6,17 @@ using UnityEngine;
 public class AttackPlayerTransition : Transition
 {
     private float _attackRange;
-    private Player _player;
+    private Enemy _enemy;
 
     private void Awake()
     {
         _attackRange = GetComponent<Enemy>().AttackDistance;
-        _player = GetComponent<Enemy>().Player;
+        _enemy = GetComponent<Enemy>();
     }
 
     private void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, _enemy.TargetsTranform.position);
 
         if(distanceToPlayer <= _attackRange)
         {
